@@ -1,0 +1,14 @@
+/**
+ * Creates a recipe with the given template
+ * @param {string} task for exampme "10x dirt -> copper_ingot"
+ * @param {typeof recipeTemplates} template object with shape and keys
+ */
+const fromTemplate = (task, template) => {
+    e.shaped(
+        task.split(" -> ")[0],
+        template.shape,
+        Object.assign(template.keys, {
+            X: task.split(" -> ")[1],
+        })
+    );
+};
