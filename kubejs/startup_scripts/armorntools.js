@@ -1,14 +1,13 @@
 // priority: 0
 
 StartupEvents.registry("item", (event) => {
-    const packMaterials = {
+    global.packMaterials = {
         "thermal:sapphire": "Sapphire",
         "thermal:ruby": "Ruby",
         "create:shadow_steel": "Shadow Steel",
         "create:refined_radiance": "Refined Radiance",
-        "create:chromatic_compound": "Chromatic Compound",
-        charged_fluix: "Charged Fluix",
-        saruix: "Saruix",
+        "kubejs:burnt_fluix": "Burnt Fluix",
+        "kubejs:saruix": "Saruix",
     };
 
     /**
@@ -33,17 +32,28 @@ StartupEvents.registry("item", (event) => {
      * @param {keyof typeof packMaterials} m Material
      * @param {Internal.ArmorMaterial_} t Tier
      * @param {number} d Durability (defaults to 256, each item got a slightly different durability value)
+     * @param {number} c Color of the item
      */
-    function armor(m, t, d) {
+    function armor(m, t, d, c) {
         const id = m;
-        const displayName = packMaterials[id];
+        const displayName = global.packMaterials[id];
 
         d = d ?? 256; // default
 
-        r(id, displayName, "helmet", t, d * 0.8);
-        r(id, displayName, "chestplate", t, d);
-        r(id, displayName, "leggings", t, d * 0.9);
-        r(id, displayName, "boots", t, d * 0.7);
+        c = c ?? 0xffffff; // default
+
+        r(id, displayName, "helmet", t, d * 0.8)
+            .texture("layer0", "kubejs:item/armor/helmet")
+            .color(0, c);
+        r(id, displayName, "chestplate", t, d)
+            .texture("layer0", "kubejs:item/armor/chestplate")
+            .color(0, c);
+        r(id, displayName, "leggings", t, d * 0.9)
+            .texture("layer0", "kubejs:item/armor/leggings")
+            .color(0, c);
+        r(id, displayName, "boots", t, d * 0.7)
+            .texture("layer0", "kubejs:item/armor/boots")
+            .color(0, c);
     }
 
     /**
@@ -51,19 +61,40 @@ StartupEvents.registry("item", (event) => {
      * @param {keyof typeof packMaterials} m Material
      * @param {Internal.ArmorMaterial_} t Tier
      * @param {number} d Durability (defaults to 256, each item got the same durability value)
+     * @param {number} c Color of the item
      */
-    function toolset(m, t, d) {
+    function toolset(m, t, d, c) {
         const id = m;
-        const displayName = packMaterials[id];
+        const displayName = global.packMaterials[id];
 
         d = d ?? 256; // default
 
-        r(id, displayName, "pickaxe", t, d);
-        r(id, displayName, "shovel", t, d);
-        r(id, displayName, "axe", t, d);
-        r(id, displayName, "hoe", t, d);
-        r(id, displayName, "paxel", t, d);
-        r(id, displayName, "sword", t, d);
+        c = c ?? 0xffffff; // default
+
+        r(id, displayName, "pickaxe", t, d)
+            .texture("layer0", "kubejs:item/tools/pickaxe_handle")
+            .texture("layer1", "kubejs:item/tools/pickaxe_head")
+            .color(1, c);
+        r(id, displayName, "shovel", t, d)
+            .texture("layer0", "kubejs:item/tools/shovel_handle")
+            .texture("layer1", "kubejs:item/tools/shovel_head")
+            .color(1, c);
+        r(id, displayName, "axe", t, d)
+            .texture("layer0", "kubejs:item/tools/axe_handle")
+            .texture("layer1", "kubejs:item/tools/axe_head")
+            .color(1, c);
+        r(id, displayName, "hoe", t, d)
+            .texture("layer0", "kubejs:item/tools/hoe_handle")
+            .texture("layer1", "kubejs:item/tools/hoe_head")
+            .color(1, c);
+        r(id, displayName, "paxel", t, d)
+            .texture("layer0", "cucumberjs:item/paxel_handle")
+            .texture("layer1", "cucumberjs:item/paxel")
+            .color(1, c);
+        r(id, displayName, "sword", t, d)
+            .texture("layer0", "kubejs:item/tools/sword_hilt")
+            .texture("layer1", "kubejs:item/tools/sword_blade")
+            .color(1, c);
     }
 
     /*
@@ -74,23 +105,23 @@ Ctrl+U - undo
 Ctrl+Alt+Up / Ctrl+Alt+Down - move cursor up / down
 Alt+Click - select
 more - https://code.visualstudio.com/docs/editor/codebasics
-    */
+*/
 
-    armor("thermal:sapphire", "iron", 1024);
-    toolset("thermal:sapphire", "iron", 1024);
+    armor("thermal:sapphire", "iron", 1024, 0x246cec);
+    toolset("thermal:sapphire", "iron", 1024, 0x246cec);
 
-    armor("thermal:ruby", "iron", 1024);
-    toolset("thermal:ruby", "iron", 1024);
+    armor("thermal:ruby", "iron", 1024, 0xc61736);
+    toolset("thermal:ruby", "iron", 1024, 0xc61736);
 
-    armor("charged_fluix", "netherite", 4096);
-    toolset("charged_fluix", "netherite", 4096);
+    armor("kubejs:burnt_fluix", "diamond", 4096, 0x604da9);
+    toolset("kubejs:burnt_fluix", "diamond", 4096, 0x604da9);
 
-    armor("saruix", "netherite", 16384);
-    toolset("saruix", "netherite", 16384);
+    armor("kubejs:saruix", "netherite", 16384, 0x4b4042);
+    toolset("kubejs:saruix", "netherite", 16384, 0x4b4042);
 
-    toolset("create:shadow_steel", "netherite", 16384);
-    armor("create:shadow_steel", "netherite", 16384);
+    toolset("create:shadow_steel", "netherite", 16384, 0x372f4c);
+    armor("create:shadow_steel", "netherite", 16384, 0x372f4c);
 
-    toolset("create:refined_radiance", "netherite", 16384);
-    armor("create:refined_radiance", "netherite", 16384);
+    toolset("create:refined_radiance", "netherite", 16384, 0xfffcff);
+    armor("create:refined_radiance", "netherite", 16384, 0xfffcff);
 });

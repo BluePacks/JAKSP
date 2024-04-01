@@ -39,15 +39,6 @@ ServerEvents.recipes((e) => {
                 },
             ],
         });
-        e.custom({
-            type: "ae2:charger",
-            ingredient: {
-                item: input,
-            },
-            result: {
-                item: output,
-            },
-        });
     };
 
     /**
@@ -81,8 +72,8 @@ ServerEvents.recipes((e) => {
     imbumentChamber(
         "create:chromatic_compound",
         "kubejs:saruix",
-        ["thermal:ruby", "thermal:sapphire", "kubejs:charged_fluix"],
+        ["thermal:ruby", "thermal:sapphire", "kubejs:burnt_fluix"],
         10000
     );
-    energizing("ae2:fluix_crystal", "kubejs:charged_fluix", 10000);
+    energizing("ae2:fluix_crystal", "kubejs:burnt_fluix", 10000);
 });
