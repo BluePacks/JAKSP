@@ -26,23 +26,23 @@ StartupEvents.registry("item", (event) => {
     for (let itemName in global.mekProcessing) {
         let item = global.mekProcessing[itemName];
         event
-            .create(item.name + "_" + "crystal")
+            .create(item.name + "_crystal")
             .texture("mekanism:item/crystal")
             .color(item.color);
         event
-            .create(item.name + "_" + "shard")
+            .create(item.name + "_shard")
             .texture("mekanism:item/shard")
             .color(item.color);
         event
-            .create(item.name + "_" + "clump")
+            .create(item.name + "_clump")
             .texture("mekanism:item/clump")
             .color(item.color);
         event
-            .create(item.name + "_" + "dirty_dust")
+            .create("dirty_" + item.name + "_dust")
             .texture("mekanism:item/dirty_dust")
             .color(item.color);
         event
-            .create(item.name + "_" + "dust")
+            .create(item.name + "_dust")
             .texture("mekanism:item/dust")
             .color(item.color);
     }

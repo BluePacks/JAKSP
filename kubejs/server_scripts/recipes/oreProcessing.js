@@ -88,7 +88,7 @@ ServerEvents.recipes((e) => {
                 },
             },
             output: {
-                item: `kubejs:${name}_dirty_dust`,
+                item: `kubejs:dirty_${name}_dust`,
             },
         });
 
@@ -96,7 +96,7 @@ ServerEvents.recipes((e) => {
             type: "mekanism:enriching",
             input: {
                 ingredient: {
-                    item: `kubejs:${name}_dirty_dust`,
+                    item: `kubejs:dirty_${name}_dust`,
                 },
             },
             output: {
